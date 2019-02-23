@@ -1,5 +1,7 @@
 package com.lambda.todo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -15,8 +17,13 @@ public class Todo
     @Column(nullable = false)
     private String descripton;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "userid")
-    private Set<User> userid;
+    String datestarted;
+    boolean completed;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="userid", nullable=false)
+    private User user;
 
     public Todo()
     {
@@ -42,13 +49,33 @@ public class Todo
         this.descripton = descripton;
     }
 
-    public Set<User> getUserid()
+    public User getUser()
     {
-        return userid;
+        return user;
     }
 
-    public void setUserid(Set<User> userid)
+    public void setUser(User user)
     {
-        this.userid = userid;
+        this.user = user;
+    }
+
+    public String getDatestarted()
+    {
+        return datestarted;
+    }
+
+    public void setDatestarted(String datestarted)
+    {
+        this.datestarted = datestarted;
+    }
+
+    public boolean isCompleted()
+    {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed)
+    {
+        this.completed = completed;
     }
 }

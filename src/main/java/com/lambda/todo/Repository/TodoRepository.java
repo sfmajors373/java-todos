@@ -9,8 +9,8 @@ public interface TodoRepository extends JpaRepository<Todo, Long>
 {
     Todo findByTodoid(long id);
 
-    @Query(value = " SELECT t.todoid, t.description FROM todo t, user u WHERE user.username = name", nativeQuery = true)
-    List<Object[]> todosByusername(String name);
+    @Query(value = " SELECT t.todoid, t.description, u.userid, u.username FROM todo t, users u WHERE t.userid = u.userid", nativeQuery = true)
+    List<Object[]> todosByusername();
 
     Todo deleteByTodoid(long id);
 }

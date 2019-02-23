@@ -49,9 +49,9 @@ public class TodosController
 
     // GET /users/userid/{userid} - return the user based off of the user id
     @GetMapping("/users/userid/{userid}")
-    public User userById(@PathVariable long id)
+    public Optional<User> userById(@PathVariable long id)
     {
-       return userrepos.findByUserid(id);
+       return userrepos.findById(id);
     }
 
     // GET /users/username/{username} - return the user based off of the user name
@@ -78,7 +78,7 @@ public class TodosController
     @GetMapping("/todos/users")
     public List<Object[]> todosForUsername(@PathVariable String name)
     {
-        return todosrepos.todosByusername(name);
+        return todosrepos.todosByusername();
     }
 
     // POST /users - adds a user
